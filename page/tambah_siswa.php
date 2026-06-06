@@ -18,9 +18,9 @@ $datakode = mysqli_fetch_assoc($carikode);
 if (!empty($datakode['kode'])) {
     $nilaikode = substr($datakode['kode'], 2);
     $kode = (int)$nilaikode + 1;
-    $hasilkode = "M-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
+    $hasilkode = "S-" . str_pad($kode, 3, "0", STR_PAD_LEFT);
 } else {
-    $hasilkode = "M-001";
+    $hasilkode = "S-001";
 }
 
 $_SESSION["KODE"] = $hasilkode;
@@ -77,19 +77,12 @@ if (isset($_POST['tambah'])) {
                         <label for="nis">NIS</label>
                         <input type="text" 
                                name="nis" 
+                               value="<?= $hasilkode?>"
                                 placeholder="Masukkan NIS Anda"
                                class="form-control" 
-                               required>
+                               required READONLY>
                     </div>
 
-                    <div class="form-group">
-                        <label for="id_user">ID User</label>
-                        <input type="text" 
-                               name="id_user" 
-                               id="id_user"
-                               placeholder="Masukkan ID User"
-                               class="form-control"
-                               required>
                     </div>
 
                     <div class="form-group">
@@ -123,12 +116,15 @@ if (isset($_POST['tambah'])) {
 
                     <div class="form-group">
                         <label for="id_kelas">ID Kelas</label>
-                        <input  name="id_kelas" 
-                                id="id_kelas"
-                                rows="3"
-                                placeholder="Masukkan ID Kelas"
-                                class="form-control"
-                                required>
+                        <select class="form-control" name="id_kelas" required>
+                                <option value="" disabled selected>--Pilih Kelas--</option>
+                                <?php
+                                $getkelas = mysqli_query($koneksi, "SELECT * FROM kelas");
+                                while ($returnkelas = mysqli_fetch_array($getkelas)) {
+                                ?>
+                                    <option value="<?= $returnkelas['id_kelas']; ?>"><?= $returnkelas['nm_kelas']; ?></option>
+                                <?php } ?>
+                            </select>
                     </div>
 
                     <div class="card-footer">

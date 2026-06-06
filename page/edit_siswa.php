@@ -14,7 +14,6 @@ $edit = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM siswa WHERE nis
 
 if (isset($_POST['tambah'])) {
     $nis = $_POST['nis'];
-    $id_user = $_POST['id_user'];
     $nm_siswa = $_POST['nm_siswa'];
     $jenkel = $_POST['jenkel'];
     $hp = $_POST['hp'];
@@ -22,7 +21,6 @@ if (isset($_POST['tambah'])) {
 
     $update = mysqli_query($koneksi, "
         UPDATE siswa SET
-            id_user='$id_user',
             nm_siswa='$nm_siswa',
             jenkel='$jenkel',
             hp='$hp',
@@ -55,12 +53,7 @@ if (isset($_POST['tambah'])) {
 
                     <div class="form-group">
                         <label>NIS</label>
-                        <input type="text" name="nis" value="<?= $edit['nis']; ?>" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>ID User</label>
-                        <input type="text" name="id_user" value="<?= $edit['id_user']; ?>" class="form-control">
+                        <input type="text" name="nis" value="<?= $edit['nis']; ?>" class="form-control" readonly>
                     </div>
 
                     <div class="form-group">
@@ -80,7 +73,15 @@ if (isset($_POST['tambah'])) {
 
                     <div class="form-group">
                         <label>ID Kelas</label>
-                        <input type="text" name="id_kelas" value="<?= $edit['id_kelas']; ?>" class="form-control">
+                       <select class="form-control" name="id_kelas" required>
+                                <option value="" disabled selected>--Pilih Kelas--</option>
+                                <?php
+                                $getkelas = mysqli_query($koneksi, "SELECT * FROM kelas");
+                                while ($returnkelas = mysqli_fetch_array($getkelas)) {
+                                ?>
+                                    <option value="<?= $returnkelas['id_kelas']; ?>"><?= $returnkelas['nm_kelas']; ?></option>
+                                <?php } ?>
+                            </select>
                     </div>
 
                     <div class="card-footer">

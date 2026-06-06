@@ -12,46 +12,48 @@
 if (isset($_GET['action'])) {
   if ($_GET['action'] == "hapus") {
     $kd = $_GET['kd'];
-    $query = mysqli_query($koneksi, "DELETE FROM kelas where kd_kelas = '$kd'");
+    $query = mysqli_query($koneksi, "DELETE FROM kelas where id_kelas = '$kd'");
     if ($query){
-      echo 
-      '<div class="alert alert-warning alert-dismissible">
-        Berhasil Di Hapus</div>';
+      echo '
+<div class="alert alert-warning alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    Berhasil Dihapus
+</div>';
       echo '<meta http-equiv="refresh" content="1;url=index.php?page=kelas">';
     }
   }
 }
 ?>
-<d class="content">
+<div class="content">
   <div class="container-fluid">
     <div class="card">
       <div class="card-body">
         <a href="index.php?page=tambah_kelas" class="btn btn-primary btn-sm">
       Tambah Kelas</a>
       <table class="table table-striped">
-          <tread>
+          <thead>
             <tr>
               <th>No</th>
-              <th>Kd Kelas</th>
+              <th>Id Kelas</th>
               <th>Nama Kelas</th>
               <th>Aksi</th>
           </tr>
-        </tread>
+        </thead>
         <?php
         $no = 0;
         $query = mysqli_query($koneksi, "SELECT * FROM kelas");
         while ($result = mysqli_fetch_array($query) ) {
-          $no++
+          $no++;
         ?>
         <tbody>
           <tr>
             <td><?= $no;?></td>
-            <td><?=$result['kd_kelas']; ?></td>
+            <td><?=$result['id_kelas']; ?></td>
             <td><?=$result['nm_kelas']; ?></td>
             <td>
-              <a href="index.php?page=kelas&action=hapus&kd=<?= $result['kd_kelas'] ?>" title="">
+              <a href="index.php?page=kelas&action=hapus&kd=<?= $result['id_kelas'] ?>" title="">
                 <span class="badge badge-danger">Hapus</span></a>
-              <a href="index.php?page=edit_kelas&kd=<?= $result['kd_kelas'] ?>" title=""><span class
+              <a href="index.php?page=edit_kelas&kd=<?= $result['id_kelas'] ?>" title=""><span class
                 ="badge badge-warning">Edit</span></a>
             </td>
           </tr>

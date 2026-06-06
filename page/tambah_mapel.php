@@ -25,19 +25,21 @@
         $kkm = $_POST['kkm'];
 
         $insert = mysqli_query($koneksi, "INSERT INTO mapel values ('$kd_mapel','$nm_mapel','$kkm')");
-        if ($insert) {
-            echo '<div class="alert alert-info-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                <h5><i class="icon fas fa-info"></i> Info </h5>
-                <h4>Berhasil Disimpan</h4></div>';
-            echo '<meta http-equiv="refresh" content="1;url=index.php?page=mapel">';
-    }else{
-            echo 'div class="alert alert-warning alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-                <h5><i class="icon fas fa-info"></i> Info </h5>
-                <h4>Gagal Disimpan</h4></div';
-    }
+       if ($insert) {
+    echo '<div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-check"></i> Info</h5>
+        <h4>Berhasil Disimpan</h4>
+    </div>';
+
+    echo '<meta http-equiv="refresh" content="1;url=index.php?page=mapel">';
+} else {
+    echo '<div class="alert alert-danger">
+        Error : '.mysqli_error($koneksi).'
+    </div>';
 }
+    }
+
 ?>
 <section class="content">
     <div class="container-fluid">

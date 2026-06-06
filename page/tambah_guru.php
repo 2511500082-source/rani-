@@ -148,7 +148,7 @@ if (isset($_POST['tambah'])) {
                                class="btn btn-primary" 
                                name="tambah" 
                                value="Simpan">
-                        <a href="index.php?page=nis" class="btn btn-secondary">Kembali</a>
+                        <a href="index.php?page=kd_guru" class="btn btn-secondary">Kembali</a>
                     </div>
 
                 </form>

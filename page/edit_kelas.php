@@ -10,14 +10,14 @@
 
     <?php
     $kd = $_GET['kd'];
-    $edit = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM kelas WHERE kd_kelas='$kd' "));
+    $edit = mysqli_fetch_array(mysqli_query($koneksi,"SELECT * FROM kelas WHERE id_kelas='$kd' "));
 
     if (isset($_POST['tambah'])){
-        $kd_kelas = $_POST['kd_kelas'];
+        $kd_kelas = $_POST['id_kelas'];
         $nm_kelas = $_POST['nm_kelas'];
 
 
-        $insert = mysqli_query($koneksi,"UPDATE kelas SET nm_kelas='$nm_kelas' WHERE kd_kelas='$kd_kelas' ");
+        $insert = mysqli_query($koneksi,"UPDATE kelas SET nm_kelas='$nm_kelas' WHERE id_kelas='$kd_kelas' ");
         if ($insert) {
             echo '<div class="alert alert-info-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
@@ -40,8 +40,8 @@
                     <div class="card-body p-2">
                         <form method="POST" action="">
                         <div class="form-group">
-                            <label for="kd_kelas">Kode Kelas</label>
-                            <input type="text" name="kd_kelas" value="<?= $edit['kd_kelas']; ?>" class="form-control" readonly>
+                            <label for="id_kelas">Id Kelas</label>
+                            <input type="text" name="id_kelas" value="<?= $edit['id_kelas']; ?>" class="form-control" readonly>
           </div>
           <div class="form-group">
             <label for="nm_kelas">Nama Kelas</label>
